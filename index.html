@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Solar System</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; touch-action: none; }
+        #canvas { width: 100vw; height: 100vh; display: block; }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            max-width: 90%;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        #speed-control, #time-control, #zoom-control { margin-top: 10px; }
+        button { padding: 5px 10px; margin-left: 5px; cursor: pointer; font-size: 12px; }
+        input[type="range"] { width: 100px; }
+        #planet-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            font-size: 14px;
+            z-index: 10;
+        }
+        #planet-portrait { width: 150px; height: 150px; margin: 0 auto; background-size: cover; }
+        @media (max-width: 600px) {
+            #ui { font-size: 12px; padding: 5px; }
+            button { padding: 3px 5px; font-size: 10px; }
+            input[type="range"] { width: 80px; }
+            #planet-info { padding: 10px; font-size: 1.5em; }
+            #planet-portrait { width: 100px; height: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas"></div>
+    <div id="ui">
+        <div id="distance">Earth-Halley Distance: Calculating...</div>
+        <div id="current-date">Date: Loading...</div>
+        <div id="speed-control">
+            <label for="speed">Speed (x): </label>
+            <input type="range" id="speed" min="1" max="1000" value="1">
+        </div>
+        <div id="time-control">
+            <label for="time">Time (days): </label>
+            <input type="range" id="time" min="-30" max="30" value="0" step="0.1">
+            <button id="reset-time">Now</button>
+        </div>
+        <div id="zoom-control">
+            <button id="zoom-in">Zoom In</button>
+            <button id="zoom-out">Zoom Out</button>
+        </div>
+    </div>
+    <div id="planet-info">
+        <div id="planet-portrait"></div>
+        <h2 id="planet-name"></h2>
+        <p id="planet-details"></p>
+        <button id="close-info">Close</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
